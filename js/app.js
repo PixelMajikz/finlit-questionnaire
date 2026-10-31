@@ -42,8 +42,7 @@ function render(){
     if(!S.saved){saveFill(S.lang,S.cat,S.ans,total);S.saved=true}
     app.innerHTML=stepper()+`<div class="res"><h1>${T("thanks")}</h1>
       <div class="sticker" style="--sc:${st[3]}"><span class="m">${st[2]}</span><strong>${T("s")[STICKERS.indexOf(st)]}</strong><em>${total} / ${max()}</em></div>
-      <button class="btn" id="again">${T("again")}</button></div><div class="dl-wrap"><button class="dl" id="share">Share by email</button><a href="#" class="dl" id="dl">Download fill-report.xlsx</a></div>`;
-    document.getElementById("share").onclick=shareReport;
+      <button class="btn" id="again">${T("again")}</button></div><div class="dl-wrap"><a href="#" class="dl" id="dl">Download fill-report.xlsx</a></div>`;
     document.getElementById("dl").onclick=e=>{e.preventDefault();downloadReport()};
     document.getElementById("again").onclick=()=>{S={step:"lang",lang:"en",cat:null,qs:[],i:0,ans:[],fallback:false};document.documentElement.lang="en";render()};
     if(total>=10)confetti();

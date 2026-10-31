@@ -57,20 +57,3 @@ function downloadReport(){
   document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),1500);
 }
-
-function toast(msg){
-  const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);
-  setTimeout(()=>t.remove(),7000);
-}
-/* Share by email: opens the device share sheet with the file attached (phones/tablets, HTTPS).
-   Where file sharing is not supported, downloads the file and opens a new email to attach it to. */
-async function shareReport(){
-  const blob=buildReport(loadFills()),file=new File([blob],"fill-report.xlsx",{type:blob.type});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){
-    try{await navigator.share({files:[file],title:"Questionnaire fill report",text:"Questionnaire fill report (fill-report.xlsx)"});return}
-    catch(e){if(e&&e.name==="AbortError")return}
-  }
-  downloadReport();
-  toast("fill-report.xlsx was downloaded. Attach it to the email that opens.");
-  setTimeout(()=>{location.href="mailto:?subject="+encodeURIComponent("Questionnaire fill report")+"&body="+encodeURIComponent("Hi,\n\nPlease find the questionnaire fill report attached (fill-report.xlsx).\n")},500);
-}
