@@ -43,7 +43,7 @@ function render(){
     app.innerHTML=stepper()+`<div class="res"><h1>${T("thanks")}</h1>
       <div class="sticker" style="--sc:${st[3]}"><span class="m">${st[2]}</span><strong>${T("s")[STICKERS.indexOf(st)]}</strong><em>${total} / ${max()}</em></div>
       <button class="btn" id="again">${T("again")}</button></div><div class="dl-wrap"><a href="#" class="dl" id="dl">Download fill-report.xlsx</a></div>`;
-    document.getElementById("dl").onclick=e=>{e.preventDefault();downloadReport()};
+    document.getElementById("dl").onclick=e=>{e.preventDefault();askPasswordThenDownload()};
     document.getElementById("again").onclick=()=>{S={step:"lang",lang:"en",cat:null,qs:[],i:0,ans:[],fallback:false};document.documentElement.lang="en";render()};
     if(total>=10)confetti();
   }

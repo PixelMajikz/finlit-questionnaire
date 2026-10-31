@@ -57,3 +57,17 @@ function downloadReport(){
   document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),1500);
 }
+
+/* Password gate for the report download. Note: this runs in the browser, so it only keeps casual users out. */
+const pwHash=s=>{let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)};
+const REPORT_PW_HASH="2c118swgd60";
+function askPasswordThenDownload(){
+  const o=document.createElement("div");o.className="modal";
+  o.innerHTML=`<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pwt"><h2 id="pwt">Enter password</h2><p>The fill report is password protected.</p><input id="pw" class="pw" type="password" autocomplete="off" aria-label="Password"><p class="pw-err" id="pwe" role="alert"></p><div class="row"><button class="btn ghost" id="pwc">Cancel</button><button class="btn" id="pwo">Download</button></div></div>`;
+  document.body.appendChild(o);
+  const inp=o.querySelector("#pw"),err=o.querySelector("#pwe");
+  const go=()=>{if(pwHash(inp.value)===REPORT_PW_HASH){o.remove();downloadReport()}else{err.textContent="Incorrect password. Please try again.";inp.select()}};
+  o.querySelector("#pwo").onclick=go;o.querySelector("#pwc").onclick=()=>o.remove();
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")go();if(e.key==="Escape")o.remove()});
+  inp.focus();
+}

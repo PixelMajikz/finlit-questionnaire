@@ -64,3 +64,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .dl:hover{border-color:var(--orange)}
 .dl-wrap{position:fixed;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100% - 32px)}
 .dl-wrap .dl{position:static;font-family:inherit;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(20,33,61,.62);display:grid;place-items:center;padding:16px;z-index:70}
+.modal-card{background:var(--card);border-radius:20px;border-top:6px solid var(--orange);padding:22px;max-width:380px;width:100%}
+.modal-card h2{margin-bottom:6px}.modal-card p{margin:0 0 12px}
+.pw{width:100%;font:inherit;font-size:1.1rem;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text)}
+.pw:focus{border-color:var(--orange);outline:none}
+.pw-err{color:#c0392b;font-weight:700;font-size:.9rem;min-height:1.4em;margin:8px 0 0}
