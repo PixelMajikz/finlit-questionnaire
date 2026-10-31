@@ -39,9 +39,12 @@ function render(){
     document.getElementById("prev").onclick=prevQ;document.getElementById("next").onclick=nextQ;
   }else{
     const total=S.qs.reduce((s,q,i)=>s+q[1][S.ans[i]][1],0),st=STICKERS.find(x=>total>=x[0]);
+    if(!S.saved){saveFill(S.lang,S.cat,S.ans,total);S.saved=true}
     app.innerHTML=stepper()+`<div class="res"><h1>${T("thanks")}</h1>
       <div class="sticker" style="--sc:${st[3]}"><span class="m">${st[2]}</span><strong>${T("s")[STICKERS.indexOf(st)]}</strong><em>${total} / ${max()}</em></div>
-      <button class="btn" id="again">${T("again")}</button></div>`;
+      <button class="btn" id="again">${T("again")}</button></div><div class="dl-wrap"><button class="dl" id="share">Share by email</button><a href="#" class="dl" id="dl">Download fill-report.xlsx</a></div>`;
+    document.getElementById("share").onclick=shareReport;
+    document.getElementById("dl").onclick=e=>{e.preventDefault();downloadReport()};
     document.getElementById("again").onclick=()=>{S={step:"lang",lang:"en",cat:null,qs:[],i:0,ans:[],fallback:false};document.documentElement.lang="en";render()};
     if(total>=10)confetti();
   }
@@ -50,6 +53,6 @@ function render(){
 
 function start(cat){
   const set=QUESTIONS[cat];
-  S.cat=cat;S.fallback=!set[S.lang];S.qs=set[S.lang]||set.en;S.i=0;S.ans=[];S.step="quiz";render();
+  S.cat=cat;S.saved=false;S.fallback=!set[S.lang];S.qs=set[S.lang]||set.en;S.i=0;S.ans=[];S.step="quiz";render();
 }
 render();

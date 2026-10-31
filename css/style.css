@@ -59,3 +59,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes fall{to{transform:translateY(108vh) rotate(720deg)}}
 @media (max-width:480px){header.top img{height:96px}h1{font-size:1.45rem}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.res{padding-bottom:100px}
+.dl{position:fixed;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;background:var(--card);color:var(--head);border:2px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.85rem;font-weight:800;text-decoration:none}
+.dl:hover{border-color:var(--orange)}
+.dl-wrap{position:fixed;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100% - 32px)}
+.dl-wrap .dl{position:static;font-family:inherit;cursor:pointer}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--navy);color:#fff;padding:10px 16px;border-radius:14px;font-weight:700;font-size:.9rem;z-index:60;max-width:90%;text-align:center}
